@@ -54,7 +54,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(ROOT_PATH,'assets')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -122,6 +122,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
+    #"libs.context_processor.get_dialog"
     )
 
 INSTALLED_APPS = (
@@ -137,6 +138,8 @@ INSTALLED_APPS = (
     'virt',
     'django.contrib.admin',
 )
+
+AUTH_PROFILE_MODULE = "cicip.ProfilPengguna"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

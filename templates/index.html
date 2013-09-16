@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <h3 class="header smaller lighter blue">Daftar Distro</h3>
+    <div class="table-header">
+            Distro-distro yang dapat dicoba saat ini
+    </div>
+
+    <table id="table_report" class="table table-striped table-bordered table-hover">
+            <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Versi</th>
+                        <th>Logo</th>
+                        <th>Keterangan</th>
+                        <th>URL</th>
+                        <th>Aksi</th>
+                    </tr>
+            </thead>
+
+            <tbody>{% for distro in list_distro %}
+                    <tr>
+                        <td>{{ distro.distro }}</td>
+                        <td>{{ distro.version }}</td>
+                        <td>{{ distro.distro.get_logo }}</td>
+                        <td>{{ distro.distro.keterangan }}</td>
+                        <td><a href="{{ distro.distro.url }}" target="_blank">{{ distro.distro.url }}</a></td>
+                        <td class="td-actions">
+                                <div class="hidden-phone visible-desktop btn-group">
+                                        <button class="btn btn-mini btn-success">
+                                                <i class="icon-ok bigger-120"></i>
+                                        </button>
+                                        Mulai
+                                </div>
+                        </td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block plugin_js %}
+<script src="/static/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/jquery.dataTables.bootstrap.js"></script>
+<script src="/static/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/static/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/static/js/jquery.slimscroll.min.js"></script>
+<script src="/static/js/jquery.easy-pie-chart.min.js"></script>
+<script src="/static/js/jquery.sparkline.min.js"></script>
+<script src="/static/js/flot/jquery.flot.min.js"></script>
+<script src="/static/js/flot/jquery.flot.pie.min.js"></script>
+<script src="/static/js/flot/jquery.flot.resize.min.js"></script>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(function() {
+            var oTable1 = $('#table_report').dataTable( {
+            "aoColumns": [
+          null,null,{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }
+            ] } );
+    })
+</script>
+
+{% endblock %}
