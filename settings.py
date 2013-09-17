@@ -140,6 +140,7 @@ INSTALLED_APPS = (
 )
 
 AUTH_PROFILE_MODULE = "cicip.ProfilPengguna"
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

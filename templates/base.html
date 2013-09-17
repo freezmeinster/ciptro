@@ -21,8 +21,8 @@
 
 		<!--fonts-->
 
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
-
+		<link rel="stylesheet" href="/static/font/opensun.css" />
+                <link rel="icon" href="/static/img/favicon.png" type="image/png" />
 		<!--ace styles-->
 
 		<link rel="stylesheet" href="/static/css/ace.min.css" />
@@ -111,13 +111,20 @@
 
 				<div id="page-content" class="clearfix">
 					<div class="row-fluid">
-						<!--PAGE CONTENT BEGINS HERE-->
+					    {% if messages %}
+					    {% for message in messages %}
+					    <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+						<button class="close" data-dismiss="alert" type="button"><i class="icon-remove"></i></button>
+						<strong>{{ message}}</strong>
+					    </div>
+					    {% endfor %}
+					    {% endif %}
 					    {% block content %}{% endblock %}
 						<!--PAGE CONTENT ENDS HERE-->
 					</div><!--/row-->
 				</div><!--/#page-content-->
 
-				<div id="ace-settings-container">
+				<!--<div id="ace-settings-container">
 					<div class="btn btn-app btn-mini btn-warning" id="ace-settings-btn">
 						<i class="icon-cog"></i>
 					</div>
@@ -145,7 +152,7 @@
 							<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
 						</div>
 					</div>
-				</div><!--/#ace-settings-container-->
+				</div>-->
 			</div><!--/#main-content-->
 		</div><!--/.fluid-container#main-container-->
 

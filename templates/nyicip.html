@@ -5,9 +5,9 @@
 
 {% block content %}
 <div class="row-fluid">
-    <h3 class="header smaller lighter blue">Daftar Distro</h3>
+    <h3 class="header smaller lighter blue">Daftar Icip-icip</h3>
     <div class="table-header">
-            Distro-distro yang dapat dicoba saat ini
+            Cicip Cicip Distro
     </div>
 
     <table id="table_report" class="table table-striped table-bordered table-hover">
@@ -15,25 +15,29 @@
                     <tr>
                         <th>Nama</th>
                         <th>Versi</th>
-                        <th>Logo</th>
-                        <th>Keterangan</th>
-                        <th>URL</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
             </thead>
 
-            <tbody>{% for distro in list_distro %}
+            <tbody>{% for vm in vm_list %}
                     <tr>
-                        <td>{{ distro.distro }}</td>
-                        <td>{{ distro.version }}</td>
-                        <td>{{ distro.distro.get_logo }}</td>
-                        <td>{{ distro.distro.keterangan }}</td>
-                        <td><a href="{{ distro.distro.url }}" target="_blank">{{ distro.distro.url }}</a></td>
+                        <td>{{ vm.distro_version.distro }}</td>
+                        <td>{{ vm.distro_version.version }}</td>
+                        <td>
+                            {% if vm.state == "down"%}
+                            <span class="label label-inverse">Mati</span>
+                            {% else %}
+                            <span class="label label-success">Hidup</span>
+                            {% endif %}
+                        </td>
                         <td class="td-actions">
                                 <div class="hidden-phone visible-desktop btn-group">
-                                        <a href="{% url 'tambah_cicip' distro.id %}" class="btn btn-mini btn-success">
-                                                <i class="icon-ok bigger-120"></i>
+                                        {% if vm.state == "up"%}
+                                        <a href="{% url 'nonton_cicip' vm.id %}" class="btn btn-mini btn-success">
+                                                <i class="icon-cloud-upload bigger-120"></i>
                                         </a>
+                                        {% endif %}
                                 </div>
                         </td>
                 </tr>
@@ -62,7 +66,7 @@
     $(function() {
             var oTable1 = $('#table_report').dataTable( {
             "aoColumns": [
-          null,null,{ "bSortable": false },{ "bSortable": false },{ "bSortable": false },{ "bSortable": false }
+          null,null,{ "bSortable": false },{ "bSortable": false }
             ] } );
     })
 </script>

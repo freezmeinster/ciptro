@@ -14,5 +14,8 @@ class VirtualMachine(models.Model):
     user = models.ForeignKey(User)
     distro_version = models.ForeignKey(Version)
     mem = models.IntegerField()
-    state = models.CharField(max_length=10,choices=STATE)
-
+    state = models.CharField(max_length=10,choices=STATE, default="up")
+    
+    def __unicode__(self):
+        return ""
+    
