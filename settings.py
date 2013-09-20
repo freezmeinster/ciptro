@@ -1,5 +1,7 @@
 import sys
 import os
+import djcelery
+djcelery.setup_loader()
 
 ROOT_PATH=os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0,os.path.join(ROOT_PATH,'apps'))
@@ -137,10 +139,14 @@ INSTALLED_APPS = (
     'cicip',
     'virt',
     'django.contrib.admin',
+    'kombu.transport.django', 
+    'djcelery'
 )
 
 AUTH_PROFILE_MODULE = "cicip.ProfilPengguna"
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+BROKER_URL = 'django://'
+CELERYBEAT_SCHEDULER  = "djcelery.schedulers.DatabaseScheduler"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
