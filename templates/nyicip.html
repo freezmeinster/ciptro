@@ -37,7 +37,11 @@
                                         <a href="{% url 'nonton_cicip' vm.id %}" class="btn btn-mini btn-success">
                                                 <i class="icon-cloud-upload bigger-120"></i>
                                         </a>
-                                        {% endif %}
+                                    {% endif %}
+                                    
+                                    <a href="{% url 'hapus_cicip' vm.id %}" class="btn btn-mini btn-danger">
+                                                <i class="icon-trash bigger-120"></i>
+                                    </a>
                                 </div>
                         </td>
                 </tr>

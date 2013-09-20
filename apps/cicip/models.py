@@ -32,11 +32,16 @@ class Distro(models.Model):
         return self.nama
 
 class TemplateOS(models.Model):
+    JNS = (
+        ('livecd', "Live CD"),
+        ("disk", "Disk")
+    )
     file_path = models.TextField()
     min_memory = models.IntegerField()
+    jenis = models.CharField(max_length=20, choices=JNS)
     
     def __unicode__(self):
-        return "aa"
+        return self.file_path
 
 class Version(models.Model):
     version = models.CharField(max_length=255)

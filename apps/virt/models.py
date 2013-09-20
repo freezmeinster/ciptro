@@ -15,7 +15,8 @@ class VirtualMachine(models.Model):
     distro_version = models.ForeignKey(Version)
     mem = models.IntegerField()
     state = models.CharField(max_length=10,choices=STATE, default="up")
+    active = models.BooleanField(default=True)
     
     def __unicode__(self):
-        return ""
+        return "%s oleh %s" %(self.distro_version, self.user.get_full_name() )
     
