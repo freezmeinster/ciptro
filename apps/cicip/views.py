@@ -5,6 +5,7 @@ from virt.models import VirtualMachine
 from django.contrib import messages
 from port_generator import get_vnc_port, get_ws_port
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 @login_required
 def home(request):
@@ -64,8 +65,22 @@ def hapus_cicip(request,id):
     return redirect('nyicip')
 
 def login_page(request):
+    if request.method == "POST":
+        data = request.POST.copy()
+        username = data.get("username")
+        password = data.get("password")
+        user = authenticate(username=username, password=password)
+        if user is not None :
+            if user.is_active :
+                login(request, user)
+                return redirect("/")
+            else :
+                messages.add_message(request, messages.WARNING, "Pengguna tidak aktif, silahkan hubungi administrator")
+        else :
+            messages.add_message(request, messages.WARNING, "Pengguna tidak terdaftar atau nama pengguna dan kata sandi tidak cocok")
     return render_to_response("login.html",{
     },context_instance=RequestContext(request))
 
 def logout_page(request):
-    pass
+    logout(request)
+    return redirect("login")
